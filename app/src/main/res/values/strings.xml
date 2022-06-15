@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ContactManager</string>
+    <string name="menu_add_contact">Add Contact</string>
+    <string name="label_add_contact">Add Contact</string>
+</resources>
