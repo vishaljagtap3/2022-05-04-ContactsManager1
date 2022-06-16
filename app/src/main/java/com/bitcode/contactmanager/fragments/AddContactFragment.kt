@@ -47,7 +47,8 @@ class AddContactFragment : Fragment() {
 
         when(item.itemId) {
             android.R.id.home ->
-                removeCurrentFragment()
+                //removeCurrentFragment()
+            parentFragmentManager.popBackStack()
         }
 
         return super.onOptionsItemSelected(item)
@@ -68,7 +69,6 @@ class AddContactFragment : Fragment() {
             onContactAddedListener?.onContactAdded(newContact)
 
             removeCurrentFragment()
-
         }
     }
 
@@ -76,6 +76,5 @@ class AddContactFragment : Fragment() {
         parentFragmentManager.beginTransaction()
             .remove(this)
             .commit()
-
     }
 }

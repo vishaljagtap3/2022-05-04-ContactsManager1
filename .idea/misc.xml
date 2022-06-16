@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/layout/add_contact_fragment.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/layout/contact_details_fragment.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/layout/contact_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/contacts_listing_fragment.xml" value="0.18072916666666666" />
       </map>

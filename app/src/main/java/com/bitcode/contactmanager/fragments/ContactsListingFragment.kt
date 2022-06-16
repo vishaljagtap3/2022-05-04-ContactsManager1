@@ -2,6 +2,7 @@ package com.bitcode.contactmanager.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bitcode.contactmanager.R
@@ -57,6 +58,7 @@ class ContactsListingFragment : Fragment() {
 
         parentFragmentManager.beginTransaction()
             .add(R.id.mainContainer, addContactFragment, AddContactFragment::class.java.name)
+            .addToBackStack(null)
             .commit()
     }
 
@@ -74,8 +76,33 @@ class ContactsListingFragment : Fragment() {
 
         binding.recyclerContacts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        contactsAdapter = ContactsAdapter(contactsList)
+        contactsAdapter = ContactsAdapter(contactsList /*, parentFragmentManager*/)
+        contactsAdapter.onContactEventListener = MyOnContactEventListener()
         binding.recyclerContacts.adapter = contactsAdapter
+    }
+
+    private inner class MyOnContactEventListener : ContactsAdapter.OnContactEventListener {
+        override fun onContactClick(position: Int, contact: Contact) {
+            addContactDetailsFragment(position, contact)
+        }
+
+        override fun onContactLongClick(position: Int, contact: Contact) {
+            Toast.makeText(context, "${contact.name} Long clicked..", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun addContactDetailsFragment(position: Int, contact: Contact) {
+
+        var contactDetailsFragment = ContactDetailsFragment()
+
+        var input = Bundle()
+        input.putSerializable("contact", contact)
+        contactDetailsFragment.arguments = input
+
+        parentFragmentManager.beginTransaction()
+            .add(R.id.mainContainer, contactDetailsFragment, ContactDetailsFragment::class.java.name)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun initData() {
