@@ -2,4 +2,8 @@
     <string name="app_name">ContactManager</string>
     <string name="menu_add_contact">Add Contact</string>
     <string name="label_add_contact">Add Contact</string>
+    <string name="title_contact_deletition_confirmation">Are you sure to delete Contact?</string>
+    <string name="label_delete_contact_yes">Delete Contact</string>
+    <string name="label_delete_contact_cancel">Cancel</string>
+    <string name="label_update_contact">Update Contact</string>
 </resources>

@@ -14,7 +14,7 @@ class ContactsListingFragment : Fragment() {
 
     private lateinit var binding: ContactsListingFragmentBinding
     private var contactsList = ArrayList<Contact>()
-    private lateinit var contactsAdapter : ContactsAdapter
+    private lateinit var contactsAdapter: ContactsAdapter
 
     private val MENU_ADD_CONTACT = 1
 
@@ -44,7 +44,7 @@ class ContactsListingFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        if(item.itemId == MENU_ADD_CONTACT) {
+        if (item.itemId == MENU_ADD_CONTACT) {
             addAddContactFragment()
         }
 
@@ -74,7 +74,8 @@ class ContactsListingFragment : Fragment() {
 
     private fun initRecyclerViewAndAdapter() {
 
-        binding.recyclerContacts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerContacts.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         contactsAdapter = ContactsAdapter(contactsList /*, parentFragmentManager*/)
         contactsAdapter.onContactEventListener = MyOnContactEventListener()
@@ -95,12 +96,32 @@ class ContactsListingFragment : Fragment() {
 
         var contactDetailsFragment = ContactDetailsFragment()
 
+        contactDetailsFragment.onContactUpdateDeleteListener =
+            object : ContactDetailsFragment.OnContactUpdateDeleteListener {
+                override fun onContactDelete(contact: Contact) {
+                    var contactPosition = contactsList.indexOf(contact)
+                    contactsList.remove(contact)
+                    contactsAdapter.notifyItemRemoved(contactPosition)
+                }
+
+                override fun onContactUpdate(oldContact: Contact, newContact: Contact) {
+                    var oldContactPosition = contactsList.indexOf(oldContact)
+                    contactsList.set(oldContactPosition, newContact)
+
+                    contactsAdapter.notifyItemChanged(oldContactPosition)
+                }
+            }
+
         var input = Bundle()
         input.putSerializable("contact", contact)
         contactDetailsFragment.arguments = input
 
         parentFragmentManager.beginTransaction()
-            .add(R.id.mainContainer, contactDetailsFragment, ContactDetailsFragment::class.java.name)
+            .add(
+                R.id.mainContainer,
+                contactDetailsFragment,
+                ContactDetailsFragment::class.java.name
+            )
             .addToBackStack(null)
             .commit()
     }

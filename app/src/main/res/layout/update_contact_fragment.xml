@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="contact"
+            type="com.bitcode.contactmanager.models.Contact" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imgContact"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <EditText
+
+            android:text="@{String.valueOf(contact.id)}"
+            android:id="@+id/edtContactId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Contact ID"
+            android:inputType="number" />
+
+        <EditText
+            android:text="@{contact.name}"
+            android:id="@+id/edtContactName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Contact Name"
+            android:inputType="text" />
+
+        <EditText
+            android:text="@{contact.phoneNumber}"
+            android:id="@+id/edtContactPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Contact Phone"
+            android:inputType="phone" />
+
+        <EditText
+            android:text="@{contact.email}"
+            android:id="@+id/edtContactEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Contact Email"
+            android:inputType="textEmailAddress" />
+
+        <Button
+            android:id="@+id/btnUpdateContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_update_contact" />
+
+    </LinearLayout>
+</layout>
